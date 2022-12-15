@@ -12,7 +12,7 @@ public class DetalleConsulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle")
-    private Integer idDEtalle;
+    private Integer idDetalle;
 
     @ManyToOne
     @JoinColumn(name = "id_consulta", nullable = false, foreignKey = @ForeignKey(name = "FK_detalle_consulta"))

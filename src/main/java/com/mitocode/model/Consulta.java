@@ -6,6 +6,7 @@ import org.w3c.dom.stylesheets.LinkStyle;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -38,8 +39,16 @@ public class Consulta {
     @OneToMany(mappedBy = "consulta", cascade = {CascadeType.ALL}, orphanRemoval = true)
     private List<DetalleConsulta> detallaconsulta;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Consulta)) return false;
+        Consulta consulta = (Consulta) o;
+        return getIdConsulta().equals(consulta.getIdConsulta());
+    }
 
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdConsulta());
+    }
 }

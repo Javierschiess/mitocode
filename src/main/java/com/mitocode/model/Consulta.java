@@ -37,7 +37,7 @@ public class Consulta {
     private LocalDateTime fecha;
 
     @OneToMany(mappedBy = "consulta", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<DetalleConsulta> detallaconsulta;
+    private List<DetalleConsulta> detalleconsulta;
 
     @Override
     public boolean equals(Object o) {

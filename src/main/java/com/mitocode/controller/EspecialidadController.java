@@ -49,5 +49,31 @@ public class EspecialidadController {
         return new ResponseEntity<>(especialidadDTO, HttpStatus.CREATED);
     }
 
+    @PutMapping
+    public ResponseEntity<EspecialidadDTO> moficiar (@RequestBody EspecialidadDTO especialidadDTO)throws Exception{
+        Especialidad especialidad = especialidadService.listarPorId(especialidadDTO.getIdEspecialidad());
+
+        if (especialidad == null){
+            throw new ModelNotFoundException("ID NO ENCONTRADO "+especialidadDTO.getIdEspecialidad());
+        }
+
+        Especialidad espe = mapper.map(especialidadDTO, Especialidad.class);
+        Especialidad e = especialidadService.modificar(espe);
+
+        return new ResponseEntity<>(especialidadDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> eliminar (@PathVariable("id") Integer id)throws Exception{
+        Especialidad especialidad = especialidadService.listarPorId(id);
+
+        if(especialidad == null){
+            throw new ModelNotFoundException("ID NO ENCONTRADO " + id);
+        }
+
+        especialidadService.eliminar(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
